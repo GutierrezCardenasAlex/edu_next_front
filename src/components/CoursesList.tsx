@@ -1,8 +1,10 @@
+// components/CoursesList.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Star } from "lucide-react";
+import { Star, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 type Course = {
   id: string;
@@ -14,9 +16,10 @@ type Course = {
   rating: number;
 };
 
-const CoursesList = () => {
+export default function CoursesList() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const mockCourses: Course[] = [
@@ -33,7 +36,7 @@ const CoursesList = () => {
         id: "2",
         title: "Node.js y Express Avanzado",
         description: "Construye APIs robustas con Node.js y Express.",
-        image: "https://tse4.mm.bing.net/th/id/OIP.fk8n8DJu9-z_0bL8k-3UGQHaFO?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+        image: "https://tse4.mm.bing.net/th/id/OIP.fk8n8DJu9-z_0bL8k-3UGQHaFO",
         instructor: "María Gómez",
         price: 34.99,
         rating: 4.7,
@@ -42,7 +45,7 @@ const CoursesList = () => {
         id: "3",
         title: "Introducción a TypeScript",
         description: "Aprende los fundamentos de TypeScript con ejemplos reales.",
-        image: "https://tse3.mm.bing.net/th/id/OIP.7g_ro9olLVcRSNT50Meg6gHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3",
+        image: "https://tse3.mm.bing.net/th/id/OIP.7g_ro9olLVcRSNT50Meg6gHaEK",
         instructor: "Carlos Díaz",
         price: 19.99,
         rating: 4.3,
@@ -52,46 +55,49 @@ const CoursesList = () => {
     setTimeout(() => {
       setCourses(mockCourses);
       setLoading(false);
-    }, 500); // simula carga
+    }, 500);
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center py-10">
-        <p className="text-gray-500 text-lg">Cargando cursos...</p>
-      </div>
-    );
+    return <p className="text-center py-10 text-gray-500">Cargando cursos...</p>;
   }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {courses.map((course) => (
-        <Link
+        <div
           key={course.id}
-          href={`/courses/${course.id}`}
-          className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-1"
+          className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col"
         >
-          <img
-            src={course.image}
-            alt={course.title}
-            className="w-full h-44 object-cover rounded-t-xl"
-          />
-          <div className="p-4">
-            <h2 className="text-lg font-semibold text-gray-800">{course.title}</h2>
-            <p className="text-gray-600 text-sm mt-1 line-clamp-2">{course.description}</p>
-            <div className="flex justify-between items-center mt-3">
-              <span className="text-indigo-600 font-bold">${course.price.toFixed(2)}</span>
-              <span className="flex items-center gap-1 text-yellow-400">
-                <Star size={16} />
-                {course.rating.toFixed(1)}
-              </span>
+          <Link href={`/courses/${course.id}`} className="flex-1">
+            <img
+              src={course.image}
+              alt={course.title}
+              className="w-full h-44 object-cover rounded-t-xl"
+            />
+            <div className="p-4 flex-1">
+              <h3 className="font-semibold text-lg text-gray-800">{course.title}</h3>
+              <p className="text-sm text-gray-600 mt-1 line-clamp-2">{course.description}</p>
+              <div className="flex justify-between items-center mt-3">
+                <span className="text-indigo-600 font-bold">${course.price}</span>
+                <span className="flex items-center gap-1 text-yellow-500">
+                  <Star size={16} />
+                  {course.rating}
+                </span>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">Por {course.instructor}</p>
             </div>
-            <p className="text-gray-500 text-xs mt-1">Instructor: {course.instructor}</p>
-          </div>
-        </Link>
+          </Link>
+
+          <button
+            onClick={() => addToCart(course)}
+            className="m-4 mt-0 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 flex items-center justify-center gap-2"
+          >
+            <ShoppingCart size={18} />
+            Añadir al carrito
+          </button>
+        </div>
       ))}
     </div>
   );
-};
-
-export default CoursesList;
+}
