@@ -64,7 +64,7 @@ const RegisterPage = () => {
         type="text"
         placeholder="Nombre"
         name="name"
-        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="w-full border border-gray-300 rounded-md text-gray-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         value={name}
         onChange={(event) => setName(event.target.value)}
       />
@@ -73,7 +73,7 @@ const RegisterPage = () => {
         type="email"
         placeholder="Correo electrónico"
         name="email"
-        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="w-full border border-gray-300 rounded-md text-gray-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
       />
@@ -82,7 +82,7 @@ const RegisterPage = () => {
         type="password"
         placeholder="Contraseña"
         name="password"
-        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        className="w-full border border-gray-300 rounded-md text-gray-700 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
