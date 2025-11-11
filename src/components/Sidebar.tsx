@@ -23,10 +23,10 @@ const Sidebar = () => {
       submenu: [
         { name: "Lista de cursos", href: "/dashboard/cursos" },
         { name: "Temas", href: "/dashboard/temarios" },
-        { name: "Categorías", href: "/dashboard/cursos/categorias" },
+        { name: "Categorías", href: "/dashboard/categorias" },
         { name: "Lecciones", href: "/dashboard/lecciones" },
         { name: "Inscripciones", href: "/dashboard/inscripciones" },
-        { name: "Certificados", href: "/dashboard/cursos/certificados" },
+        { name: "Certificados", href: "/dashboard/certificados" },
       ],
     },
     { name: "Estudiantes", href: "/dashboard/students", icon: <Users size={20} /> },
