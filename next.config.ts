@@ -1,36 +1,23 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
-    domains: [], // deprecated
-    remotePatterns: [
-      // Tus imágenes de cursos
+    domains: ["res.cloudinary.com", "lh3.googleusercontent.com"],
+    formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    optimizeCss: true,
+    scrollRestoration: true,
+  },
+  async headers() {
+    return [
       {
-        protocol: 'https',
-        hostname: 'facialix.com',
+        source: "/api/(.*)",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
       },
-      {
-        protocol: 'https',
-        hostname: 'tse1.mm.bing.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'tse2.mm.bing.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'tse3.mm.bing.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'tse4.mm.bing.net',
-      },
-      // Para imágenes de usuarios (Google, etc.)
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-    ],
+    ];
   },
 };
 

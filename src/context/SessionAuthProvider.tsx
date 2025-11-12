@@ -1,12 +1,21 @@
+// context/SessionAuthProvider.tsx
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+import { SessionWrapper } from "./SessionWrapper";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const SessionAuthProvider = ({ children }: Props) => {
-  return <SessionProvider>{children}</SessionProvider>;
-};
-export default SessionAuthProvider;
+export default function SessionAuthProvider({ children }: Props) {
+  return (
+    <SessionProvider
+      refetchInterval={0}
+      refetchOnWindowFocus={false}
+      refetchWhenOffline={false}
+    >
+      <SessionWrapper>{children}</SessionWrapper>
+    </SessionProvider>
+  );
+}

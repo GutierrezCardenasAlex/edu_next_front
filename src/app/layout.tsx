@@ -25,13 +25,8 @@ export default function RootLayout({
         <SessionAuthProvider>
           <CartProvider>
             <div className="flex flex-col min-h-screen">
-              {/* Navbar siempre visible */}
               <Navbar />
-
-              {/* Contenido principal */}
-              <main className="flex-1">
-                {children}
-              </main>
+              <main className="flex-1">{children}</main>
             </div>
           </CartProvider>
         </SessionAuthProvider>
